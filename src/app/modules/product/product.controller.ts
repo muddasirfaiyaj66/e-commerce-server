@@ -31,12 +31,24 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
 
 const getProducts = async (req: Request, res: Response) => {
   try {
-    const result = await ProductServices.getProductsFromDb();
-    res.status(200).json({
-      success: true,
-      message: 'Products fetched successfully!',
-      data: result,
-    });
+    const { searchTerm } = req.query;
+    let result;
+
+    if (searchTerm) {
+      result = await ProductServices.searchProductsFromDb(searchTerm as string);
+      res.status(200).json({
+        success: true,
+        message: `Products matching search term '${searchTerm}' fetched successfully!`,
+        data: result,
+      });
+    } else {
+      result = await ProductServices.getProductsFromDb();
+      res.status(200).json({
+        success: true,
+        message: 'All products fetched successfully!',
+        data: result,
+      });
+    }
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(500).json({
@@ -130,6 +142,7 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
     }
   }
 };
+
 export const ProductController = {
   createProduct,
   getProducts,
