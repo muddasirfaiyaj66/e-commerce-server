@@ -34,7 +34,7 @@ const getProducts = async (req: Request, res: Response) => {
     const result = await ProductServices.getProductsFromDb();
     res.status(200).json({
       success: true,
-      message: 'Products are retrieved successfully',
+      message: 'Products fetched successfully!',
       data: result,
     });
   } catch (error: unknown) {
@@ -52,8 +52,32 @@ const getProducts = async (req: Request, res: Response) => {
     }
   }
 };
-
+const getSingleProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const result = await ProductServices.getSingleProductFromDbByID(productId);
+    res.status(200).json({
+      success: true,
+      message: 'Product fetched successfully!',
+      data: result,
+    });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({
+        success: false,
+        message: error.message || 'Something went wrong',
+        data: error,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'An unknown error occurred',
+      });
+    }
+  }
+};
 export const ProductController = {
   createProduct,
   getProducts,
+  getSingleProduct,
 };
