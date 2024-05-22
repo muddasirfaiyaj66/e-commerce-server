@@ -10,7 +10,7 @@
 git clone https://github.com/muddasirfaiyaj66/e-commerce-server.git
 ```
 
-1. **Create a  .env  file in root directory** 
+2. **Create a  .env  file in root directory** 
 
 ```jsx
 PORT=5000
@@ -18,20 +18,20 @@ DATABASE_URL= //add your mongodb database url
 
 ```
 
-1. **Install dependencies:**
+3. **Install dependencies:**
 
 ```graphql
 npm i
 ```
 
-1. Start the development server:
+4. Start the development server:
 
 ```graphql
 npm run start:dev
 
 ```
 
-1. Product Api’s routes
+5. Product Api’s routes
 
 ```jsx
 1.Create Product(POST): http://localhost:5000/api/products/
@@ -43,7 +43,7 @@ npm run start:dev
 
 ```
 
-1. Orders Api’s routes 
+6. Orders Api’s routes 
 
 ```jsx
 1. Create a Order (POST):http://localhost:5000/api/orders/
