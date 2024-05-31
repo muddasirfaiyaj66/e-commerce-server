@@ -1,18 +1,17 @@
 import { z } from 'zod';
 
 const variantValidationSchema = z.object({
-  type: z.string().nonempty({ message: 'Type is required' }),
-  value: z.string().nonempty({ message: 'Value is required' }),
+  type: z.string({ message: 'Type is required' }),
+  value: z.string({ message: 'Value is required' }),
 });
 
-// Define the Zod schema for TProduct
 const productValidationSchema = z.object({
-  name: z.string().nonempty({ message: 'Name is required' }),
-  description: z.string().nonempty({ message: 'Description is required' }),
+  name: z.string({ message: 'Name is required' }),
+  description: z.string({ message: 'Description is required' }),
   price: z.number().positive({ message: 'Price must be a positive number' }),
-  category: z.string().nonempty({ message: 'Category is required' }),
+  category: z.string({ message: 'Category is required' }),
   tags: z
-    .array(z.string().nonempty({ message: 'Tag cannot be empty' }))
+    .array(z.string({ message: 'Tag cannot be empty' }))
     .nonempty({ message: 'At least one tag is required' }),
   variants: z
     .array(variantValidationSchema)
